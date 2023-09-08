@@ -15,7 +15,7 @@ export class AddFormComponent implements OnInit{
   FormDataArray : any[]= []
   index: any;
   item : any; 
-  selectedFile: File | null = null; // To store the selected file
+  selectedFile: File | null = null; 
   imageUrl = this.serviceArr.imageUrl
 
   ngOnInit(): void {
@@ -136,8 +136,6 @@ export class AddFormComponent implements OnInit{
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
       this.selectedFile = inputElement.files[0];
-
-      // Display the selected image immediately
       this.uploadImage();
     }
   }
