@@ -1,0 +1,154 @@
+<button type="button" [routerLink]="['']" class="btn btn-outline-dark mx-3 mt-1"><- Form List </button>
+
+<div class="m-3" style="text-align: center;">
+    <h3>{{title}}</h3>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="card col-md-10" style="width: 30rem;">
+      <form class=" m-4" [formGroup]="addform" #form="ngForm"  (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="firstname" class="form-label">Name</label>
+          <input type="text" class="form-control" name="Name" required formControlName="Name"
+          [ngClass] = "{'is-invalid': submit && formData.Name.errors}">
+          <div *ngIf= "submit && formData.Name.errors" class="invalid-feedback" >
+            <div *ngIf= "formData.Name.errors['required']" >First Name is required!</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="lastname" class="form-label">Address</label>
+          <textarea type="text" class="form-control" name="Address" required formControlName="Address" style="height: 100px"
+          [ngClass] = "{'is-invalid': submit && formData.Address.errors}"
+          ></textarea>
+          <div *ngIf= "submit && formData.Address.errors" class="invalid-feedback" >
+            <div *ngIf= "formData.Address.errors['required']" >Address is required!</div>
+          </div>
+        </div>
+        <div>
+            <label class="form-label">Gender</label>
+            <div class="d-flex mx-4">
+                <div class="form-check">
+                    <input type="radio" name="gender" value="Male" formControlName="gender" required>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Male
+                    </label>
+                  </div>
+                  <div class="form-check mx-3">
+                    <input  type="radio" name="gender" value="Female" formControlName="gender"required>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Female
+                    </label>
+                </div>  
+            </div>
+            <div *ngIf= "submit && formData.gender.errors" class="invalid-feedback">
+                <div *ngIf= "formData.gender.errors['required']">Gender is required!</div>
+            </div>
+        </div>
+        <div>
+            <label class="form-label">Qualifications</label>
+            <div class="d-flex">
+                <div class="form-check">
+                    <input class="form-check-input mx-1" name="qualif" type="checkbox" value="SSLC" (change)="addQualification('SSLC')"  id="flexCheckDefault" formArrayName="qualif">
+                    <label class="form-check-label mx-1" for="flexCheckDefault">
+                      SSLC
+                    </label>
+                </div>
+                <div class="form-check mx-2">
+                    <input class="form-check-input" name="qualif" type="checkbox" value="+2" (change)="addQualification('+2')" id="flexCheckChecked" formArrayName="qualif">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      +2
+                    </label>
+                </div>
+                <div class="form-check mx-2">
+                    <input class="form-check-input" name="qualif" type="checkbox" value="Degree" (change)="addQualification('Degree')" [checked]="qualificationsArray.value.includes('Degree')" id="flexCheckChecked" formArrayName="qualif" >
+                    <label class="form-check-label" for="flexCheckChecked">
+                      Degree
+                    </label>
+                </div>
+            </div>
+              <div *ngIf="submit && formData.qualif.errors" class="invalid-feedback">
+                <div *ngIf= "formData.qualif.errors['required']">required!</div>
+              </div>
+        </div>
+        <div>
+            <label class="form-label">Image :</label>
+            <div class="d-flex mx-5">
+                <div class="mx-3">
+                    <img *ngIf="imageUrl" [src]="imageUrl" alt="Selected Image"
+                     style="width: 200px;" />
+                    <img *ngIf="!imageUrl" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+                     alt="Placeholder" style="width: 200px;" />
+                </div>
+                <div class="d-flex my-5">
+                    <div class="btn btn-primary btn-rounded" style="height:37px;">
+                    <label class="form-label text-white" for="customFile1">Add</label>
+                    <input type="file" (change)="onFileSelected($event)" class="form-control d-none" id="customFile1" formControlName="image" />
+                </div>
+                <div *ngIf= "submit && formData.image.errors" class="invalid-feedback" >
+                    <div *ngIf="submit && formData.image.errors['required']" class="text-danger">
+                        Image is required!
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="number" class="form-control" formControlName="phone"
+            [ngClass] = "{'is-invalid': submit && formData.phone.errors}">
+            <div *ngIf= "submit && formData.phone.errors" class="invalid-feedback" >
+              <div *ngIf= "formData.phone.errors['required']">Phone Number is required!</div>
+              <div *ngIf= "formData.phone.errors['pattern']">Invalid phone number!</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" formControlName="email"
+            [ngClass] = "{'is-invalid': submit && formData.email.errors}">
+            <div *ngIf= "submit && formData.email.errors" class="invalid-feedback" >
+              <div *ngIf= "formData.email.errors['required']">Last Name is required!</div>
+              <div *ngIf= "formData.email.errors['email']">Invalid email address!</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Skills</label>
+            <div class="d-flex">
+                <input class="form-control mx-3" type="text" id="formFile" formControlName="skills"
+                [ngClass]="{'is-invalid': submit && formData.skills.errors}">
+                <div *ngIf="submit && formData.skills.errors" class="invalid-feedback">
+                    <div *ngIf="formData.skills.errors['required']">Skills are required!</div>
+                </div>
+                <button type="button" class="btn btn-outline-success" (click)="addSkills()">+</button>
+            </div>
+            <div class="mx-5" formArrayName="extraSkills" *ngFor="let item of extraSkills.controls; let i = index">
+                <div class="d-flex my-2">
+                  <input type="text"  class="form-control mx-3" [formControlName]="i">
+                  <button type="button" class="btn btn-outline-danger" (click)="deleteSkill(i)">-</button>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Personal Skills</label>
+            <div class="d-flex">
+                <input type="text" class="form-control mx-3" formControlName="pSkills"
+                [ngClass]="{'is-invalid': submit && formData.pSkills.errors}">
+                <div *ngIf="submit && formData.pSkills.errors" class="invalid-feedback">
+                    <div *ngIf="formData.pSkills.errors['required']">Personal Skills are required!</div>
+                </div>
+                <div formArrayName="extraPSkills">
+
+                </div>
+                <button type="button" class="btn btn-outline-success" (click)="addPSkills()">+</button>
+            </div>
+            <div class="mx-5" formArrayName="extraPSkills" *ngFor="let item of extraPSkills.controls; let i = index">
+                <div class="d-flex my-2">
+                  <input type="text"  class="form-control mx-3" [formControlName]="i">
+                  <button type="button" class="btn btn-outline-danger" (click)="deletePSkill(i)">-</button>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-secondary mx-4" (click)="resetForm()">Reset</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+  

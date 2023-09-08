@@ -1,0 +1,40 @@
+<button type="button" [routerLink]="['add-form']" class="btn btn-outline-dark mx-3 mt-1">
+    < Add Form
+</button>
+
+
+
+<div class="container pt-5">
+    <div class="row">
+        <div class="list-group">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="clickable-row" (click)="redirectToLink(i)" *ngFor="let item of Arr; let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.Name}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary mx-2" (click)="edit(i)">
+                                <i class="bi bi-pencil-square text-primary"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" (click)="delete(i)">
+                                <i class="bi bi-archive text-danger"> </i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+</div>
