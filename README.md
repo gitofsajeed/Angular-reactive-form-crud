@@ -1,4 +1,7 @@
-# DataProfile
+# Angular Reactive form CRUD and Listed, Detailed View
+
+This Angular project that demonstrates the implementation of a reactive form for CRUD the data. It also includes a detail profile view for displaying the data. This project serves as a comprehensive example of how to build a dynamic web application using Angular with a focus on data management and user interactions.
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
